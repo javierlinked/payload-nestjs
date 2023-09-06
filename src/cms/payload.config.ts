@@ -2,8 +2,12 @@ import { buildConfig } from 'payload/config'
 import { Pages } from './collections/pages.collection'
 import * as path from 'path'
 import { Logo, LogoIcon } from './logo/logo.component'
+import { LexicalPlugin } from "payload-plugin-lexical";
 
 export default buildConfig({
+  plugins: [
+    LexicalPlugin({   }),
+  ],
   collections: [
     Pages,
   ],
@@ -22,6 +26,9 @@ export default buildConfig({
     },
   },
   typescript: {
-    outputFile: path.resolve(__dirname, './cms/types/cms.types.ts'),
+    outputFile: path.resolve(__dirname, 'types/cms.types.ts'),
+  },
+  graphQL: {
+    schemaOutputFile: path.resolve(__dirname, 'types/generated-schema.graphql'),
   },
 })

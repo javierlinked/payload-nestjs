@@ -22,7 +22,7 @@ import config from './payload.config'
       },
     },
   ],
-  exports: [CmsService, 'CMS'],
+  exports: [CmsService,CmsModule,'CMS'],
 })
 export class CmsModule {
 }

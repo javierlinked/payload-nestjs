@@ -6,7 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "build": "nest build",
+    "prebuild": "rimraf dist && rimraf build && rimraf ./node_modules/.cache",
+    "build": "nest build && yarn cms:build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -18,7 +19,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "cms:types": "cross-env PAYLOAD_CONFIG_PATH=src/cms/payload.config.ts payload generate:types"
+    "cms:build": "PAYLOAD_CONFIG_PATH=src/cms/payload.config.ts payload build",
+    "cms:types": "PAYLOAD_CONFIG_PATH=src/cms/payload.config.ts payload generate:types",
+    "cms:graphql": "PAYLOAD_CONFIG_PATH=src/cms/payload.config.ts payload generate:graphQLSchema"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -29,6 +32,7 @@
     "graphql": "^16.6.0",
     "js-yaml": "^4.1.0",
     "payload": "^1.6.7",
+    "payload-plugin-lexical": "^0.6.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reflect-metadata": "^0.1.13",
